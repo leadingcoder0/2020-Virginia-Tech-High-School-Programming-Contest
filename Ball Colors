@@ -1,0 +1,82 @@
+import java.util.*;
+
+public class BallColors {
+   public static ArrayList<Integer[]> sequenceIndexes;
+   
+   public static int amntOfBalls;
+   public static int[] balls;
+   
+   public static int amntOfDislikedColors;
+   public static int[] dislikedColors;
+   
+   public static int amntOfLikedColors;
+   public static int[] likedColors;
+
+   public static void main(String[] args) {
+      
+      Scanner stdin = new Scanner(System.in);
+   	amntOfBalls = stdin.nextInt();
+      
+      sequenceIndexes = new ArrayList<Integer[]>(factorial(amntOfBalls));
+      
+      balls = new int[amntOfBalls];
+      for (int i=0; i<amntOfBalls; i++){
+         balls[i] = stdin.nextInt();
+      }
+      
+      amntOfDislikedColors = stdin.nextInt();
+      dislikedColors = new int[amntOfDislikedColors];
+      for (int i=0; i<amntOfDislikedColors; i++){
+         dislikedColors[i] = stdin.nextInt();
+      }
+      
+      amntOfLikedColors = stdin.nextInt();
+      likedColors = new int[amntOfLikedColors];
+      for (int i=0; i<amntOfLikedColors; i++){
+         likedColors[i] = stdin.nextInt();
+      }
+      
+      Set<Integer> s = new HashSet<Integer>();
+       for(int i = 1; i <= amntOfBalls; i++) {
+         s.add(i);
+       }
+       
+       permutations(s, new Stack<Integer>(), s.size());
+       //for (int i = 0; i < sequences.size(); i++)
+       //  System.out.println(Arrays.toString(sequences.get(i)));
+       
+       //for(int i
+   }
+   
+   public static void permutations(Set<Integer> items, Stack<Integer> permutation, int size) {
+       /* permutation stack has become equal to size that we require */
+      if(permutation.size() == size) {
+           /* print the permutation */
+         sequenceIndexes.add(permutation.toArray(new Integer[0]));
+      }
+   
+       /* items available for permutation */
+      Integer[] availableItems = items.toArray(new Integer[0]);
+      for(Integer i : availableItems) {
+           /* add current item */
+         permutation.push(i);
+
+           /* remove item from available item set */
+         items.remove(i);
+
+           /* pass it on for next permutation */
+         permutations(items, permutation, size);
+
+           /* pop and put the removed item back */
+         items.add(permutation.pop());
+      }
+   }
+   
+   public static int factorial(int n) {
+      int sum = n;
+      for (int i = n - 1; i > 0; i--) {
+         sum = sum * i;
+      }
+      return sum;
+   }
+}
