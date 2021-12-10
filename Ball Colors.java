@@ -1,6 +1,7 @@
 // Ted Tran
 // 12/9/2021
 // My Solution to 2020 Virginia Tech High School Programming Contest: Ball Colors
+// https://open.kattis.com/problems/ballcolors
 
 import java.util.*;
 
@@ -55,19 +56,16 @@ public class BallColors {
       for (int i=0; i<amntOfLikedColors; i++){
          likedColors[i] = stdin.nextInt();
       }
-      
-      // Set up     
-      sequenceIndexes = new ArrayList<Integer[]>(balls.length);
-      sequences = new ArrayList<Integer[]>(balls.length);
-      
-      //
-      
+          
+      // Set up permutations
       Set<Integer> s = new HashSet<Integer>();
       for(int i = 0; i < balls.length; i++) {
          s.add(i);
       }
        
       // Gets every possible combination of ball colors
+      sequenceIndexes = new ArrayList<Integer[]>(balls.length);
+      sequences = new ArrayList<Integer[]>(balls.length);
       permutations(s, new Stack<Integer>(), balls.length);
       for(int i = 0; i < sequenceIndexes.size(); i++) {
          for(int j = 0; j < sequenceIndexes.get(i).length; j++) {
@@ -77,7 +75,7 @@ public class BallColors {
        
        // Get rid of duplicates
       ArrayList<Integer[]> nonDuplicates = removeDuplicates(sequences);
-
+      
       // Grabs sum of possible orders with respect to conditions
       int sum = 0;
       for(int i = 0; i < nonDuplicates.size(); i++) {
@@ -108,7 +106,7 @@ public class BallColors {
             int indexEndToBeChanged = indexStartToBeChanged+likedColors.length-1;
             
             // Change likeOrder in array to a dummy value
-            for(int i = indexStartToBeChanged; i < indexEndToBeChanged; i++) {
+            for(int i = indexStartToBeChanged; i < indexEndToBeChanged + 1; i++) {
                arr[i] = -1;
             }
             hadLikeOrder = true;
