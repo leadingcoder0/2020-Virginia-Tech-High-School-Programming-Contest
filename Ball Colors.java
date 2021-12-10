@@ -1,3 +1,5 @@
+// CODE IS TOO SLOW; TIMELIMIT EXCEEDED OF 1 SECOND
+
 // Ted Tran
 // 12/9/2021
 // My Solution to 2020 Virginia Tech High School Programming Contest: Ball Colors
